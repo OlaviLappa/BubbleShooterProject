@@ -23,5 +23,10 @@ public class Configuration : MonoBehaviour
                 _ballsCollection.Add(_ball);
             }
         }
+
+        UserBall user = new UserBall(_ballsCollection);
+        BallThrow ballThrow = new BallThrow();
+
+        StartCoroutine(ballThrow.NextThrow(user._onGenerateNewUserBall));
     } 
 }
