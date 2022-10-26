@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Ball : IBall
 {
@@ -21,6 +22,24 @@ public class Ball : IBall
         ballModel.transform.position = new Vector3(x + BallSize.x * xPos, y + BallSize.y * yPos, _zPosition);
 
         var ballModelRenderer = ballModel.GetComponent<Renderer>();
-        ballModelRenderer.material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        ballModelRenderer.material.color = GetRandomColor();
+    }
+
+    private Color GetRandomColor()
+    {
+        int index = Random.Range(0, 5);
+
+        List<Color> colors = new List<Color>
+        {
+            Color.black,
+            Color.white,
+            Color.green, 
+            Color.red,
+            Color.cyan,
+            Color.blue,
+            Color.gray
+        };
+
+        return colors[index];
     }
 }
