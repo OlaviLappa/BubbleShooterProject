@@ -3,11 +3,11 @@ using UnityEngine;
 public class Ball : IBall
 {
     public Color BallColor { get; set; }
-    public float BallSize { get; set; }
+    public Vector3 BallSize { get; set; }
 
-    private const float _zPosition = 1f;
+    private const float _zPosition = -6.54f;
 
-    public Ball(Color ballColor, float ballSize)
+    public Ball(Color ballColor, Vector3 ballSize)
     {
         this.BallColor = ballColor;
         this.BallSize = ballSize;
@@ -21,7 +21,7 @@ public class Ball : IBall
         ballModel.AddComponent<Renderer>();
 
         ballModel.transform.position = new Vector3(x, y, _zPosition);
-        ballModel.transform.localScale = new Vector3(BallSize, BallSize, BallSize);
+        ballModel.transform.localScale = BallSize;
 
         var ballModelRenderer = ballModel.GetComponent<Renderer>();
         ballModelRenderer.material.SetColor("_Color", BallColor);

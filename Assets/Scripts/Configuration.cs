@@ -14,7 +14,7 @@ public class Configuration : MonoBehaviour
         for (int i = 0; i < _collectionLength; i++)
         {
             Color color = new Color();
-            Ball _ball = new Ball(color, Random.Range(0, 5));
+            Ball _ball = new Ball(color, new Vector3(0.1, 0.1, 0.1));
             _ball.InitNewBall(Random.Range(0, 10), Random.Range(0, 10));
             _ballsCollection.Add(_ball);
         }
