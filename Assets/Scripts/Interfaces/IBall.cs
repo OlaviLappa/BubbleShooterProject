@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IBall
 {
-    void SetBallPosition(float x, float y);
+    void InitNewBall(float x, float y)
 }

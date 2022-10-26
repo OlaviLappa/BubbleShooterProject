@@ -15,8 +15,7 @@ public class Configuration : MonoBehaviour
         {
             Color color = new Color();
             Ball _ball = new Ball(color, Random.Range(0, 5));
-            _ball.SetBallPosition(Random.Range(0, 10), Random.Range(0, 10));
-
+            _ball.InitNewBall(Random.Range(0, 10), Random.Range(0, 10));
             _ballsCollection.Add(_ball);
         }
     } 
