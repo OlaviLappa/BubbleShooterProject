@@ -6,7 +6,7 @@ public class Ball : IBall
     public Color BallColor { get; set; }
     public Vector3 BallSize { get; set; }
 
-    protected const float _zPosition = -6.54f;
+    protected const float _zPosition = -5.57f;
 
     public Ball() { }
     public Ball(Color ballColor) => this.BallColor = ballColor;
@@ -17,14 +17,14 @@ public class Ball : IBall
     protected virtual GameObject CreateNewBallModel(float x, float y, int xPos, int yPos)
     {
         GameObject ballModel = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        ballModel.AddComponent<Renderer>();
 
         ballModel.transform.localScale = BallSize;
         ballModel.transform.position = new Vector3(x + BallSize.x * xPos, y + BallSize.y * yPos, _zPosition);
-
+        ballModel.GetComponent<SphereCollider>().isTrigger = true;
+        ballModel.AddComponent<BallDetection>();
         var ballModelRenderer = ballModel.GetComponent<Renderer>();
         ballModelRenderer.material.color = GetRandomColor();
-
+        
         return ballModel;
     }
 
@@ -55,13 +55,13 @@ public class UserBall : Ball
     private List<Ball> _ballCollection;
     private GameObject _userBall;
 
-    public UserBall() { }
+    public UserBall() => _onGenerateNewUserBall = () => GenerateNewUserBall();
     public UserBall(List<Ball> ballCollection)
     {
-        _ballCollection = ballCollection;
-        _onGenerateNewUserBall = new OnGenerateNewUserBall(GenerateNewUserBall);
+        this._ballCollection = ballCollection;
+        _onGenerateNewUserBall = () => GenerateNewUserBall();
     }
-        
+
     public void ShowBallCollection()
     {
         foreach (var item in _ballCollection)
@@ -73,7 +73,9 @@ public class UserBall : Ball
     private GameObject GenerateNewUserBall()
     {
         _userBall = CreateNewBallModel(0f, 4.66f, 1, 1);
-        _userBall.transform.localScale = _ballCollection[0].BallSize;
+
+        _userBall.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        _userBall.GetComponent<SphereCollider>().isTrigger = false;
 
         return _userBall;
     }

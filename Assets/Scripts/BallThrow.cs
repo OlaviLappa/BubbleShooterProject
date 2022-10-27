@@ -13,6 +13,6 @@ public class BallThrow
         _currentBall = onGenerateNewUserBall();
 
         _currentBall.AddComponent<ObjectManipulation>();
-        _currentBall.AddComponent<Rigidbody>();
+        _currentBall.AddComponent<Rigidbody>().isKinematic = true;
     }
 }
