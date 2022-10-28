@@ -12,7 +12,7 @@ public class ObjectManipulation : MonoBehaviour
     private Vector3 _lastPosition;
     private Vector3 aVector, bVector;
 
-    private float _speed = 5f;
+    private float _speed = 9f;
 
     private void Start()
     {
@@ -23,6 +23,7 @@ public class ObjectManipulation : MonoBehaviour
     private void OnMouseDrag() => _aimingMode = true;
     bool t = false;
     Vector3 lasPos;
+
     protected virtual void Update() ///вынести всю логику в класс BallThrow, сюда передавать только делегат с ссылкой на метод
     {
         if (_aimingMode)
@@ -42,7 +43,7 @@ public class ObjectManipulation : MonoBehaviour
             }
 
             _lastPosition = _launchPos + mouseDelta;
-            this.gameObject.transform.position = new Vector3(_lastPosition.x, _lastPosition.y, -5.57f);
+            this.gameObject.transform.position = new Vector3(_lastPosition.x, _lastPosition.y, -11.21f);
 
             if (Input.GetMouseButtonUp(0))
             {

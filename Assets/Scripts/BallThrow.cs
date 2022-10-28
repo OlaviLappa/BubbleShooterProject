@@ -11,8 +11,6 @@ public class BallThrow
         yield return new WaitForSeconds(2f);
 
         _currentBall = onGenerateNewUserBall();
-
         _currentBall.AddComponent<ObjectManipulation>();
-        _currentBall.AddComponent<Rigidbody>().isKinematic = true;
     }
 }

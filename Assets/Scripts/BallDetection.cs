@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class BallDetection : MonoBehaviour
 {
@@ -6,26 +7,25 @@ public class BallDetection : MonoBehaviour
     {
         if(other.TryGetComponent(out ObjectManipulation objectManipulation))
         {
-            Debug.Log(other.GetType());
-
             var ballModelRenderer1 = this.gameObject.GetComponent<Renderer>();
             var ballModelRenderer2 = objectManipulation.GetComponent<Renderer>();
 
             if (ballModelRenderer1.material.color != ballModelRenderer2.material.color)
             {
+                LaunchNewRaund();
+
                 objectManipulation.Test(objectManipulation.transform.position);
                 objectManipulation.GetComponent<SphereCollider>().isTrigger = true;
                 Destroy(objectManipulation.GetComponent<ObjectManipulation>());
-
-                LaunchNewRaund();
             }
 
             else
             {
-                Destroy(this.gameObject);
-                Destroy(objectManipulation.gameObject);
-
                 LaunchNewRaund();
+
+                SphereCollider sp = this.gameObject.transform.GetChild(0).gameObject.GetComponent<SphereCollider>();
+                sp.gameObject.SetActive(true);
+                Debug.Log(sp.radius);
             }
         }
     }
