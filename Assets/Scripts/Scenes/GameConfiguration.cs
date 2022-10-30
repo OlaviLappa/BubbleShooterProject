@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class GameConfiguration : MonoBehaviour
 {
-    public static SceneManagerBase sceneManagerBase;
+    private SceneManagerBase sceneManagerBase;
     [SerializeField] Button[] _menuButtons;
 
     void Start()

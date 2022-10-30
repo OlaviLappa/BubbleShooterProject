@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class BallDetection : MonoBehaviour
 {
@@ -14,10 +13,16 @@ public class BallDetection : MonoBehaviour
 
             if (ballModelRenderer1.material.color != ballModelRenderer2.material.color)
                 objectManipulation.GetComponent<SphereCollider>().isTrigger = true;
+                
 
             else
             {
                 Transform childBallObject = this.gameObject.transform.GetChild(0);
+
+                GameObject _electricSfxPrefab = Resources.Load<GameObject>("Effects/CFX2_SparksHit_B Sphere");
+                GameObject _electricSfxCopy = Instantiate(_electricSfxPrefab) as GameObject;
+
+                _electricSfxCopy.transform.position = childBallObject.transform.position;
                 childBallObject.gameObject.SetActive(true);
             }
 

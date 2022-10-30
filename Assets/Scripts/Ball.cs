@@ -1,21 +1,24 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Assets.Scripts.Scenes;
 
 public class Ball : IBall
 {
     public Color BallColor { get; set; }
     public Vector3 BallSize { get; set; }
 
+    protected GameObject _particleSfx { get; set; }
+
     public static float _zPosition = -11.21f;
+
 
     public Ball() { }
     public Ball(Color ballColor) => this.BallColor = ballColor;
     public Ball(Vector3 ballSize) => this.BallSize = ballSize;
 
-    public void InitNewBall(GameObject _ballObejct, float x, float y, int xPos, int yPos) => CreateNewBallModel(out _ballObejct, x, y, xPos, yPos);
+    public void InitNewBall(GameObject _ballObejct, float x, float y, int xPos, int yPos, GameObject _electricSfx) 
+        => CreateNewBallModel(out _ballObejct, x, y, xPos, yPos, _electricSfx);
 
-    protected virtual void CreateNewBallModel(out GameObject _ballObejct, float x, float y, int xPos, int yPos)
+    protected virtual void CreateNewBallModel(out GameObject _ballObejct, float x, float y, int xPos, int yPos, GameObject _electricSfx)
     {
         _ballObejct = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         GameObject ballModelChild = new GameObject();
@@ -62,7 +65,7 @@ public class Ball : IBall
     }
 }
 
-public class UserBall : Ball
+public sealed class UserBall : Ball
 {
     public delegate GameObject OnGenerateNewUserBall();
     public OnGenerateNewUserBall _onGenerateNewUserBall;
@@ -73,13 +76,13 @@ public class UserBall : Ball
     
     private GameObject GenerateNewUserBall()
     {
-        CreateNewBallModel(out _userBall, 0f, 2.66f, 1, 1);
+        CreateNewBallModel(out _userBall, 0f, 2.66f, 1, 1, _particleSfx);
         return _userBall;
     }
     
-    protected override void CreateNewBallModel(out GameObject _ballObejct, float x, float y, int xPos, int yPos)
+    protected override void CreateNewBallModel(out GameObject _ballObejct, float x, float y, int xPos, int yPos, GameObject _electricSfx)
     {
-        base.CreateNewBallModel(out _ballObejct, x, y, xPos, yPos);
+        base.CreateNewBallModel(out _ballObejct, x, y, xPos, yPos, _electricSfx);
 
         _ballObejct.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         _ballObejct.GetComponent<SphereCollider>().isTrigger = false;
