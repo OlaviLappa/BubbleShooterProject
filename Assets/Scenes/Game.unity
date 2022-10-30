@@ -701,7 +701,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 
 --- !u!222 &427258264
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1170,7 +1170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1047769041
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2007,6 +2007,7 @@ MonoBehaviour:
   - {fileID: 64654795}
   - {fileID: 1739855967}
   _gameMenuPanel: {fileID: 1047769040}
+  _scoreValueTxt: {fileID: 427258263}
 --- !u!1 &2096334793
 GameObject:
   m_ObjectHideFlags: 0
