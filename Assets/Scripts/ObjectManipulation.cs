@@ -1,16 +1,15 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class ObjectManipulation : MonoBehaviour
 {
-    [SerializeField] private Vector3 _launchPos;
-    [SerializeField] private bool _aimingMode;
-
-    private bool _isFliengStart = false;
-
+    private Vector3 _launchPos;
     private Vector3 direction;
     private Vector3 _lastPosition;
     private Vector3 aVector, bVector;
+
+    private bool _aimingMode;
+    private bool _isChange = false;
+    private bool _isFliengStart = false;
 
     private float _speed = 9f;
 
@@ -21,8 +20,6 @@ public class ObjectManipulation : MonoBehaviour
     }
 
     private void OnMouseDrag() => _aimingMode = true;
-    bool t = false;
-    Vector3 lasPos;
 
     protected virtual void Update() ///вынести всю логику в класс BallThrow, сюда передавать только делегат с ссылкой на метод
     {
@@ -59,29 +56,29 @@ public class ObjectManipulation : MonoBehaviour
             bVector = _launchPos;
 
             direction = bVector - aVector;
-            transform.position += (direction * Time.deltaTime * _speed);
 
-            /*if (lasPos != null)
+            if (_isChange)
             {
-                direction.x = -direction.x;
-            }*/
+                Debug.Log("Is change okok2222");
+                transform.position += (new Vector3(-direction.x, direction.y, direction.z) * Time.deltaTime * _speed);
+            }
+
+            else
+            {
+                transform.position += (_speed * Time.deltaTime * direction);
+            }
         }
-
-        /*if (t)
-        {
-            aVector = _lastPosition;
-            bVector = _launchPos;
-
-            direction = bVector - aVector;
-            transform.position += (new Vector3(-direction.x, direction.y, direction.z) * Time.deltaTime * _speed);
-        }*/
     }
 
-    public void Test(Vector3 lastPos)
+    public void RepeatInitialize()
     {
+        Configuration.InitNewUserBall();
         _isFliengStart = false;
-        lasPos = lastPos;
-        //t = true;
-        //_isFliengStart = false;
+    }
+
+    public void ChangeDirection(bool isChange)
+    {
+        _isChange = isChange;
+        Debug.Log("Is change okok");
     }
 }

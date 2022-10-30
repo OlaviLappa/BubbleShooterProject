@@ -5,12 +5,13 @@ using static UserBall;
 public class BallThrow
 {
     private GameObject _currentBall;
-
-    public IEnumerator NextThrow(OnGenerateNewUserBall onGenerateNewUserBall)
+    
+    public void NextThrow(OnGenerateNewUserBall onGenerateNewUserBall)
     {
-        yield return new WaitForSeconds(2f);
-
-        _currentBall = onGenerateNewUserBall();
-        _currentBall.AddComponent<ObjectManipulation>();
+        if(_currentBall == null)
+        {
+            _currentBall = onGenerateNewUserBall();
+            _currentBall.AddComponent<ObjectManipulation>();
+        }
     }
 }

@@ -3,38 +3,25 @@ using System.Collections.Generic;
 
 public class BallDetection : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider obj)
     {
-        if(other.TryGetComponent(out ObjectManipulation objectManipulation))
+        if(obj.TryGetComponent(out ObjectManipulation objectManipulation))
         {
             var ballModelRenderer1 = this.gameObject.GetComponent<Renderer>();
             var ballModelRenderer2 = objectManipulation.GetComponent<Renderer>();
 
-            if (ballModelRenderer1.material.color != ballModelRenderer2.material.color)
-            {
-                LaunchNewRaund();
+            objectManipulation.RepeatInitialize();
 
-                objectManipulation.Test(objectManipulation.transform.position);
+            if (ballModelRenderer1.material.color != ballModelRenderer2.material.color)
                 objectManipulation.GetComponent<SphereCollider>().isTrigger = true;
-                Destroy(objectManipulation.GetComponent<ObjectManipulation>());
-            }
 
             else
             {
-                LaunchNewRaund();
-
-                SphereCollider sp = this.gameObject.transform.GetChild(0).gameObject.GetComponent<SphereCollider>();
-                sp.gameObject.SetActive(true);
-                Debug.Log(sp.radius);
+                Transform childBallObject = this.gameObject.transform.GetChild(0);
+                childBallObject.gameObject.SetActive(true);
             }
+
+            Destroy(objectManipulation.GetComponent<ObjectManipulation>());
         }
-    }
-
-    private void LaunchNewRaund()
-    {
-        UserBall userBall = new UserBall();
-        BallThrow ballThrow = new BallThrow();
-
-        StartCoroutine(ballThrow.NextThrow(userBall._onGenerateNewUserBall));
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +10,7 @@ public class Configuration : MonoBehaviour
 
     private void Start()
     {
+        Vector2 firstBallPosition = new Vector2(-3.41f, 6.0f);
         _ballsCollection = new List<Ball>();
         GameObject _ballObejct = new GameObject();
 
@@ -19,20 +19,20 @@ public class Configuration : MonoBehaviour
             for (int j = 1; j < _collectionDeep; j++)
             {
                 Ball _ball = new Ball(new Vector3(0.4f, 0.4f, 0.4f));
-                _ball.InitNewBall(_ballObejct, -3.41f, 7.3f, i, j);
+                _ball.InitNewBall(_ballObejct, firstBallPosition.x, firstBallPosition.y, i, j);
 
                 _ballsCollection.Add(_ball);
             }
         }
 
+        InitNewUserBall();
+    }
+
+    public static void InitNewUserBall()
+    {
         UserBall user = new UserBall();
         BallThrow ballThrow = new BallThrow();
 
-        StartCoroutine(ballThrow.NextThrow(user._onGenerateNewUserBall));
-    }
-
-    private void Update()
-    {
-        
+        ballThrow.NextThrow(user._onGenerateNewUserBall);
     }
 }

@@ -1,12 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Assets.Scripts.Scenes;
 
 public class Ball : IBall
 {
     public Color BallColor { get; set; }
     public Vector3 BallSize { get; set; }
 
-    protected const float _zPosition = -11.21f;
+    public static float _zPosition = -11.21f;
 
     public Ball() { }
     public Ball(Color ballColor) => this.BallColor = ballColor;
@@ -23,7 +24,7 @@ public class Ball : IBall
         ballModelChild.gameObject.SetActive(false);
         ballModelChild.AddComponent<BallGroupsCreating>();
         ballModelChild.AddComponent<SphereCollider>();
-
+        
         SphereCollider spc1 = _ballObejct.GetComponent<SphereCollider>();
         SphereCollider spc2 = ballModelChild.GetComponent<SphereCollider>();
 
@@ -69,13 +70,13 @@ public class UserBall : Ball
     private GameObject _userBall;
 
     public UserBall() => _onGenerateNewUserBall = () => GenerateNewUserBall();
-
+    
     private GameObject GenerateNewUserBall()
     {
-        CreateNewBallModel(out _userBall, 0f, 4.66f, 1, 1);
+        CreateNewBallModel(out _userBall, 0f, 2.66f, 1, 1);
         return _userBall;
     }
-
+    
     protected override void CreateNewBallModel(out GameObject _ballObejct, float x, float y, int xPos, int yPos)
     {
         base.CreateNewBallModel(out _ballObejct, x, y, xPos, yPos);

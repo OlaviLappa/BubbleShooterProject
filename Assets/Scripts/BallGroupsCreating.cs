@@ -1,23 +1,20 @@
 using UnityEngine;
+using Assets.Scripts;
 
 public class BallGroupsCreating : MonoBehaviour
 {
-    private BallDetection ballDetection1;
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider obj)
     {
-        if (other.gameObject.TryGetComponent(out BallDetection ballDetection)) //первичное вхождение
+        if (obj.gameObject.TryGetComponent(out BallDetection ballDetection))
         {
-            ballDetection1 = ballDetection;
-
             var ballModelRenderer1 = this.gameObject.transform.GetComponentInParent<Renderer>();
-            var ballModelRenderer2 = ballDetection1.GetComponent<Renderer>();
+            var ballModelRenderer2 = ballDetection.GetComponent<Renderer>();
 
             if (ballModelRenderer1.material.color == ballModelRenderer2.material.color)
             {
-                other.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                obj.gameObject.transform.GetChild(0).gameObject.SetActive(true);
 
-                Object.Destroy(other.gameObject);
+                Object.Destroy(obj.gameObject);
                 Object.Destroy(ballModelRenderer1.gameObject);
             }
         }
