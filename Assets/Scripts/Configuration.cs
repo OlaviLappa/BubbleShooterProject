@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Configuration : MonoBehaviour
 {
@@ -10,11 +9,8 @@ public class Configuration : MonoBehaviour
 
     private GameObject _electricSfxPrefab;
 
-    //public static UnityEvent OnCreateNewUserBall;
-
     private void Start()
     {
-        //OnCreateNewUserBall = new UnityEvent();
         _ballsCollection = new List<Ball>();
 
         GameObject _ballObejct = new GameObject();
@@ -30,10 +26,5 @@ public class Configuration : MonoBehaviour
                 _ballsCollection.Add(_ball);
             }
         }
-
-        /*OnCreateNewUserBall.AddListener(() =>
-        {
-            InitNewUserBall();
-        });*/
     }
 }
