@@ -10,13 +10,11 @@ public class Configuration : MonoBehaviour
 
     private GameObject _electricSfxPrefab;
 
-    public static UnityEvent OnCreateNewUserBall;
-
-    private void Awake() => InitNewUserBall();
+    //public static UnityEvent OnCreateNewUserBall;
 
     private void Start()
     {
-        OnCreateNewUserBall = new UnityEvent();
+        //OnCreateNewUserBall = new UnityEvent();
         _ballsCollection = new List<Ball>();
 
         GameObject _ballObejct = new GameObject();
@@ -33,17 +31,9 @@ public class Configuration : MonoBehaviour
             }
         }
 
-        OnCreateNewUserBall.AddListener(() =>
+        /*OnCreateNewUserBall.AddListener(() =>
         {
             InitNewUserBall();
-        });
-    }
-
-    private void InitNewUserBall()
-    {
-        UserBall user = new UserBall();
-        BallThrow ballThrow = new BallThrow();
-
-        ballThrow.NextThrow(user._onGenerateNewUserBall);
+        });*/
     }
 }

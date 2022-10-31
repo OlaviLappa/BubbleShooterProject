@@ -44,7 +44,7 @@ public class ObjectManipulation : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0))
             {
-                Configuration.OnCreateNewUserBall.Invoke();
+                LevelConfiguration.OnCreateNewUserBall.Invoke();
 
                 _aimingMode = false;
                 _isFliengStart = true;
