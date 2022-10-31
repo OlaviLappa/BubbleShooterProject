@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ObjectManipulation : MonoBehaviour
@@ -30,7 +31,7 @@ public class ObjectManipulation : MonoBehaviour
 
             Vector3 mouseDelta = mousePos3D - _launchPos;
 
-            float maxMagnitude = this.GetComponent<SphereCollider>().radius * 2;
+            float maxMagnitude = this.GetComponent<SphereCollider>().radius * 4;
 
             if (mouseDelta.magnitude > maxMagnitude)
             {

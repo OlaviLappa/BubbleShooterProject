@@ -32,7 +32,7 @@ public class Ball : IBall
 
         spc1.radius = 0.50f;
         spc1.isTrigger = true;
-        spc2.radius = 1.5f;
+        spc2.radius = 2.0f;
         spc2.isTrigger = true;
 
         _ballObejct.transform.localScale = BallSize;

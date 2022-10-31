@@ -12,7 +12,6 @@ public class BallDetection : MonoBehaviour
             if (ballModelRenderer1.material.color != ballModelRenderer2.material.color)
             {
                 objectManipulation.GetComponent<SphereCollider>().isTrigger = true;
-                //Configuration.OnCreateNewUserBall.Invoke();
             }
                 
             else
@@ -26,8 +25,6 @@ public class BallDetection : MonoBehaviour
 
                 _electricSfxCopy.transform.position = childBallObject.transform.position;
                 childBallObject.gameObject.SetActive(true);
-
-                //Configuration.OnCreateNewUserBall.Invoke();
             }
 
             Destroy(objectManipulation.GetComponent<ObjectManipulation>());

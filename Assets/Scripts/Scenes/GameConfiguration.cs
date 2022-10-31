@@ -19,8 +19,5 @@ public class GameConfiguration : MonoBehaviour
         sceneManagerBase.LoadNewSceneRoutine("Game");
     }
 
-    private void QuitGameHandler()
-    {
-        Debug.Log("Quit from game");
-    }
+    private void QuitGameHandler() => sceneManagerBase.QuitRoutine();
 }
