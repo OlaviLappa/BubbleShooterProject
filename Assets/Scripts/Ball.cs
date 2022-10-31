@@ -10,7 +10,6 @@ public class Ball : IBall
 
     public static float _zPosition = -11.21f;
 
-
     public Ball() { }
     public Ball(Color ballColor) => this.BallColor = ballColor;
     public Ball(Vector3 ballSize) => this.BallSize = ballSize;

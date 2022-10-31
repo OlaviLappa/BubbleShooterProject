@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Configuration : MonoBehaviour
 {
@@ -9,12 +10,17 @@ public class Configuration : MonoBehaviour
 
     private GameObject _electricSfxPrefab;
 
+    public static UnityEvent OnCreateNewUserBall;
+
+    private void Awake() => InitNewUserBall();
+
     private void Start()
     {
-        Vector2 firstBallPosition = new Vector2(-3.41f, 6.0f);
-
+        OnCreateNewUserBall = new UnityEvent();
         _ballsCollection = new List<Ball>();
+
         GameObject _ballObejct = new GameObject();
+        Vector2 firstBallPosition = new Vector2(-3.41f, 6.0f);
 
         for (int i = 1; i < _collectionLength; i++)
         {
@@ -27,10 +33,13 @@ public class Configuration : MonoBehaviour
             }
         }
 
-        InitNewUserBall();
+        OnCreateNewUserBall.AddListener(() =>
+        {
+            InitNewUserBall();
+        });
     }
 
-    public static void InitNewUserBall()
+    private void InitNewUserBall()
     {
         UserBall user = new UserBall();
         BallThrow ballThrow = new BallThrow();

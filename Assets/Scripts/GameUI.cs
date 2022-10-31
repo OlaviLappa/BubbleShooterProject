@@ -50,13 +50,4 @@ public class GameUI : MonoBehaviour
     private void CloseGameMenu() => _gameMenuPanel.SetActive(false);
     private void ReloadLevel() => sceneManagerBase.LoadNewSceneRoutine("Game");
     private void LeaveGame() => sceneManagerBase.LoadNewSceneRoutine("MainMenu");
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            settlementSystem.AddGlasses(this, 12);
-            Debug.Log(glassesVault.Glasses);
-        }
-    }
 }

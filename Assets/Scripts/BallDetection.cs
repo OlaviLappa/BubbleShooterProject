@@ -1,5 +1,4 @@
 using UnityEngine;
-using Assets.Scripts;
 
 public class BallDetection : MonoBehaviour
 {
@@ -10,10 +9,11 @@ public class BallDetection : MonoBehaviour
             var ballModelRenderer1 = this.gameObject.GetComponent<Renderer>();
             var ballModelRenderer2 = objectManipulation.GetComponent<Renderer>();
 
-            objectManipulation.RepeatInitialize();
-
             if (ballModelRenderer1.material.color != ballModelRenderer2.material.color)
+            {
                 objectManipulation.GetComponent<SphereCollider>().isTrigger = true;
+                //Configuration.OnCreateNewUserBall.Invoke();
+            }
                 
             else
             {
@@ -26,6 +26,8 @@ public class BallDetection : MonoBehaviour
 
                 _electricSfxCopy.transform.position = childBallObject.transform.position;
                 childBallObject.gameObject.SetActive(true);
+
+                //Configuration.OnCreateNewUserBall.Invoke();
             }
 
             Destroy(objectManipulation.GetComponent<ObjectManipulation>());

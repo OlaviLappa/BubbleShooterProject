@@ -3,12 +3,11 @@ using UnityEngine;
 public class ObjectManipulation : MonoBehaviour
 {
     private Vector3 _launchPos;
-    private Vector3 direction;
+    private Vector3 _direction;
     private Vector3 _lastPosition;
     private Vector3 aVector, bVector;
 
     private bool _aimingMode;
-    private bool _isChange = false;
     private bool _isFliengStart = false;
 
     private float _speed = 9f;
@@ -21,7 +20,7 @@ public class ObjectManipulation : MonoBehaviour
 
     private void OnMouseDrag() => _aimingMode = true;
 
-    protected virtual void Update() ///вынести всю логику в класс BallThrow, сюда передавать только делегат с ссылкой на метод
+    private void Update()
     {
         if (_aimingMode)
         {
@@ -44,41 +43,23 @@ public class ObjectManipulation : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0))
             {
+                Configuration.OnCreateNewUserBall.Invoke();
+
                 _aimingMode = false;
                 _isFliengStart = true;
                 _lastPosition = transform.position;
+
+                aVector = _lastPosition;
+                bVector = _launchPos;
+
+                _direction = bVector - aVector;
             }
         }
 
         if (_isFliengStart)
-        {
-            aVector = _lastPosition;
-            bVector = _launchPos;
-
-            direction = bVector - aVector;
-
-            if (_isChange)
-            {
-                Debug.Log("Is change okok2222");
-                transform.position += (new Vector3(-direction.x, direction.y, direction.z) * Time.deltaTime * _speed);
-            }
-
-            else
-            {
-                transform.position += (_speed * Time.deltaTime * direction);
-            }
-        }
+            transform.position += _speed * Time.deltaTime * _direction;
     }
 
-    public void RepeatInitialize()
-    {
-        Configuration.InitNewUserBall();
-        _isFliengStart = false;
-    }
-
-    public void ChangeDirection(bool isChange)
-    {
-        _isChange = isChange;
-        Debug.Log("Is change okok");
-    }
+    public void ChangeDirectionX() => _direction = new Vector3(-_direction.x, _direction.y, _direction.z);
+    public void ChangeDirectionY() => _direction = new Vector3(_direction.x, -_direction.y, _direction.z);
 }
